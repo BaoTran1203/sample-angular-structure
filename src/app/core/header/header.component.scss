@@ -1,0 +1,36 @@
+.nav-notification {
+  position: relative;
+  
+  .icon {
+    font-size: 18px;
+  }
+  
+  .nav-notification-list {
+    //display: none;
+    position: absolute;
+    top: 54px;
+    right: 0;
+    width: 280px;
+    min-height: 190px;
+    background: #fff;
+    border: #cecece 1px solid;
+    box-shadow: #cecece 2px 2px 4px;
+    
+    a {
+      display: block;
+      padding: 8px 16px;
+      color: #000;
+      border-bottom: #cecece 1px solid;
+      
+      small {
+        display: block;
+      }
+    }
+    
+    a:hover {
+      cursor: pointer;
+      text-decoration: none;
+      background: #e8e8e8;
+    }
+  }
+}

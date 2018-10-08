@@ -1,0 +1,452 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&subset=vietnamese');
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+  transform: none !important;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+}
+
+* {
+  outline: none !important;
+}
+
+.form-control,
+.btn,
+.dropdown-item {
+  font-size: 13px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group .checkbox label {
+  font-weight: normal;
+}
+
+select.form-control {
+  height: 34px !important;
+}
+
+.dropdown-item {
+  text-align: center;
+}
+
+.card-header {
+  position: relative !important;
+  
+  .card-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .card-tools {
+    position: absolute;
+    width: auto;
+    top: 4px;
+    right: 16px;
+  }
+}
+
+.page-header {
+  margin: 0 0 8px !important;
+  
+  h1 {
+    color: #FF5722;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+  }
+}
+
+a, a:not([href]):not([tabindex]) {
+  cursor: pointer;
+  color: #1565C0;
+}
+
+.box {
+  padding: 16px;
+  margin-bottom: 16px;
+  border: #cecece 1px solid;
+  border-radius: 8px;
+  
+  border-top: #FF5722 2px solid;
+  
+  h4.box-heading {
+    color: #FF5722;
+    font-size: 15px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    
+    position: relative;
+    
+    .close {
+      position: absolute;
+      padding: 4px;
+      display: inline-block;
+      top: -8px;
+      right: -8px;
+      color: #000;
+    }
+  }
+  
+  h2 {
+    color: #FF5722;
+    font-size: 15px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    margin-top: 24px;
+  }
+  
+  .table {
+    margin-bottom: 24px;
+  }
+}
+
+.table-detail {
+  font-size: 13px;
+  border-bottom: #efefef 1px solid;
+  
+  td {
+    padding: 12px;
+  }
+}
+
+.box.is-top {
+  border-top: #FF5722 3px solid;
+}
+
+.payment-method {
+  background: #f5f5f5;
+  position: relative;
+  padding: 16px 16px 16px 80px;
+  margin-top: 16px;
+  cursor: pointer;
+  
+  > img {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 48px;
+  }
+  
+  > h4 {
+    font-size: 15px;
+    margin: 0 0 4px;
+    padding: 0;
+  }
+  
+  > p {
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.payment-method-form-data {
+  padding: 32px;
+  margin-bottom: 16px;
+  border: #f5f5f5 1px solid;
+}
+
+.payment-method:hover > h4 {
+  color: #FF5722;
+}
+
+.form-group {
+  position: relative;
+  
+  .icon {
+    position: absolute;
+    top: 16px;
+    right: 0;
+    padding: 12px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #FF5722;
+  }
+}
+
+// These styles are HEAVILY, HEAVILY inspired (STOLEN!!)
+// from the Angular 2 docs
+
+// valid and required show green
+input.ng-valid[required] {
+  border-left: 5px solid #42A948; /* green */
+  box-shadow: none !important;
+}
+
+// invalid
+input.ng-invalid {
+  border-left: 5px solid #FF5722 !important; /* red */
+  box-shadow: none !important;
+}
+
+nav.bg-dark {
+  background-color: #FF5722 !important;
+  
+  .navbar-nav .nav-link {
+    color: #fff;
+  }
+}
+
+.table .dropdown .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+.table p {
+  margin: 3px 0;
+}
+
+.lottery-box {
+  
+  .select-text {
+    font-size: 13px !important;
+  }
+  
+  .select-box {
+    .item-inner {
+      border-bottom: none !important;
+    }
+  }
+  
+  .small {
+    font-size: 11px;
+    color: darken(#ececec, 50%);
+    text-align: center;
+    margin: 0 !important;
+  }
+  
+  .table {
+    border: none;
+    width: 100%;
+    
+    tr td {
+      border: none;
+      padding: 4px;
+      vertical-align: middle !important;
+    }
+    
+    .number-item {
+      margin-right: 6px;
+      border-width: 2px;
+      margin-bottom: 6px;
+      font-size: 14px;
+      padding: 2px 2px 0;
+    }
+    
+    .number-item.active {
+      border-color: #4CAF50;
+      background: #fff;
+      color: #4CAF50;
+    }
+    
+    .button-full.button-outline {
+      font-size: 14px;
+      height: 32px;
+      margin-top: 4px;
+    }
+    
+    .trash {
+      color: lighten(#222, 40%);
+      font-size: 18px;
+    }
+  }
+  
+  [radio-group] {
+    margin: -1px 0 0px !important;
+    
+    .item-inner {
+      border-bottom: none !important;
+    }
+    
+    .item-block {
+      border-top: none !important;
+      border-bottom: none !important;
+    }
+  }
+  
+  .number-of-rounds button.active {
+    background: #D50000;
+    color: #fff;
+  }
+}
+
+.number-item {
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #D50000;
+  border: #D50000 1px solid;
+  color: #fff !important;
+  font-size: 14px;
+  padding: 2px 0;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+}
+
+.number-item.outline {
+  background-color: #fff;
+  border: #D50000 1px solid;
+  color: #D50000 !important;
+}
+
+.number-item.lasted {
+  background-color: #FF9800;
+  border: #FF9800 1px solid;
+  color: #fff !important;
+}
+
+.number-item.purple {
+  background-color: #521d6c;
+  border: #521d6c 1px solid;
+  color: #fff !important;
+}
+
+.number-item.purple.outline {
+  background-color: #fff;
+  border: #521d6c 1px solid;
+  color: #521d6c !important;
+}
+
+.lottery-box .table tr td.text-primary {
+  color: #D50000 !important;
+}
+
+.lottery-box ul {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin: 0 0 16px;
+  
+  li {
+    display: inline-block;
+    margin-right: 2px;
+  }
+}
+
+.winner {
+  text-align: center;
+  margin-top: 24px;
+  
+  img {
+    max-width: 102px;
+  }
+  
+  h3 {
+    font-size: 16px;
+    margin-top: 8px;
+  }
+}
+
+.input-group-addon {
+  padding: 3.5px 7px;
+}
+
+.table td {
+  vertical-align: middle !important;
+}
+
+.ngb-dp-day {
+  font-size: 12px;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.table td .img-thumbnail {
+  max-height: 40px;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+.img-md {
+  max-width: 48px;
+}
+
+.analytic-box {
+  padding: 24px 16px;
+  margin-bottom: 32px;
+  border: #efefef 1px solid;
+  border-radius: 4px;
+  border-top: #FF5722 2px solid;
+  text-align: center;
+  
+  h4 {
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h2 {
+    font-size: 22px;
+    padding: 0;
+    margin: 6px 0 0;
+  }
+}
+
+.dropdown-item {
+  font-size: 12px;
+  cursor: pointer;
+}
+
+body::-webkit-scrollbar {
+  width: 4px;
+}
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #01579b;
+  outline: 1px solid slategrey;
+}
+
+.img-xs {
+  max-width: 96px;
+}
+
+.img-detail {
+  max-width: 128px;
+}
+
+.item-id {
+  font-size: 10px;
+  width: 60px;
+  word-break: break-all;
+  margin-top: 4px;
+  text-align: center;
+}
+
+.table td {
+  word-break: break-all;
+}
+
+.btn-circle {
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
