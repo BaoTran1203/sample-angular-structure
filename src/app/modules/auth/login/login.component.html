@@ -1,3 +1,69 @@
-<p>
-  login works!
-</p>
+<!--<toaster-container></toaster-container>-->
+
+<form class="form-login" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>
+    Đăng nhập vào hệ thống
+  </h2>
+  <!-- /.form-signin-heading -->
+  
+  <div class="form-group">
+    <label>Địa chỉ Email</label>
+    
+    <input type="email" class="form-control" formControlName="email" autofocus title="Địa chỉ Email">
+    
+    <p *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+      <small *ngIf="email.errors.required">
+        Vui lòng nhập email
+      </small>
+      
+      <small *ngIf="email.errors.email">
+        Email không đúng định dạng
+      </small>
+    </p>
+  </div>
+  <!-- ./form-group -->
+  
+  <div class="form-group">
+    <label>Mật khẩu</label>
+    
+    <input type="password" class="form-control" ngbButton formControlName="password" title="Mật khẩu">
+    
+    <p *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+      <small *ngIf="password.errors.required">
+        Vui lòng nhập mật khẩu
+      </small>
+    </p>
+  </div>
+  <!-- ./form-group -->
+  
+  <div class="row">
+    <div class="col-6">
+      <div class="form-check checkbox">
+        <input class="form-check-input" type="checkbox" formControlName="is_remember" title="Remember">
+        <label class="form-check-label">
+          Ghi nhớ
+        </label>
+      </div>
+      <!-- /.form-check -->
+    </div>
+    <!-- /.col-xs-6 -->
+    
+    <div class="col-6">
+      <div class="text-right">
+        <a routerLink="/auth/forgot">Quên mật khẩu?</a>
+      </div>
+    </div>
+    <!-- /.col-xs-6 -->
+  </div>
+  <!-- /.row -->
+  
+  <div class="text-center">
+    <label>
+      <a routerLink="/auth/register">Đăng ký tài khoản</a>
+    </label>
+  </div>
+  
+  <button class="btn btn-primary btn-block" [disabled]="!form.valid" type="submit">
+    Đăng nhập
+  </button>
+</form>

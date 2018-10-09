@@ -1,3 +1,35 @@
-<p>
-  forgot works!
-</p>
+<!--<toaster-container></toaster-container>-->
+
+<form class="form-forgot" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>
+    Quên mật khẩu
+  </h2>
+  <!-- /.form-signin-heading -->
+  
+  <div class="form-group">
+    <label>Địa chỉ Email</label>
+    
+    <input type="email" class="form-control" formControlName="email" autofocus title="Địa chỉ Email">
+    
+    <p *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+      <small *ngIf="email.errors.required">
+        Vui lòng nhập email
+      </small>
+      
+      <small *ngIf="email.errors.email">
+        Email không đúng định dạng
+      </small>
+    </p>
+  </div>
+  <!-- ./form-group -->
+  
+  <div class="text-center">
+    <label>
+      <a routerLink="/auth/login">Quay về đăng nhập</a>
+    </label>
+  </div>
+  
+  <button class="btn btn-primary btn-block" [disabled]="!form.valid" type="submit">
+    Gửi mã xác nhận
+  </button>
+</form>

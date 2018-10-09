@@ -1,3 +1,92 @@
-<p>
-  register works!
-</p>
+<!--<toaster-container></toaster-container>-->
+
+<form class="form-register" [formGroup]="form" (ngSubmit)="onSubmit(form)">
+  <h2>
+    Đăng ký tài khoản
+  </h2>
+  
+  <div class="form-group">
+    <label>Địa chỉ Email</label>
+    
+    <input type="text" class="form-control" formControlName="email" title="">
+    
+    <p *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+      <small *ngIf="email.errors.required">
+        Vui lòng nhập email
+      </small>
+      
+      <small *ngIf="email.errors.email">
+        Email không đúng định dạng
+      </small>
+    </p>
+  </div>
+  <!-- ./form-group -->
+  
+  <div class="form-group">
+    <label>Họ Tên</label>
+    
+    <input type="text" class="form-control" formControlName="fullName" title="">
+    
+    <p *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)" class="text-danger">
+      <small *ngIf="fullName.errors.required">
+        Vui lòng nhập họ tên
+      </small>
+    </p>
+  </div>
+  <!-- ./form-group -->
+  
+  <div class="form-group">
+    <label>Số điện thoại</label>
+    
+    <input type="text" class="form-control" formControlName="phone" title="">
+    
+    <p *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="text-danger">
+      <small *ngIf="phone.errors.required">
+        Vui lòng nhập số điện thoại
+      </small>
+    </p>
+  </div>
+  <!-- ./form-group -->
+  
+  <div class="form-group">
+    <label>Mật khẩu</label>
+    
+    <input type="password" class="form-control" ngbButton formControlName="password" title="">
+    
+    <p *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+      <small *ngIf="password.errors.required">
+        Vui lòng nhập mật khẩu
+      </small>
+    </p>
+  </div>
+  <!-- ./form-group -->
+  
+  <div class="form-group">
+    <label>Mật khẩu</label>
+    
+    <input type="password" class="form-control" ngbButton formControlName="confirm_password" title="">
+    
+    <p *ngIf="confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)" class="text-danger">
+      <small *ngIf="confirm_password.errors.required">
+        Vui lòng nhập mật khẩu xác nhận
+      </small>
+    </p>
+  
+    <p *ngIf="confirm_password.valid && (confirm_password.dirty || confirm_password.touched)" class="text-danger">
+      <small *ngIf="form.errors['mismatch']">
+        Mật khẩu xác nhận không chính xác
+      </small>
+    </p>
+  </div>
+  <!-- ./form-group -->
+  
+  <div class="text-center">
+    <label>
+      <a routerLink="/auth/login">Quay về đăng nhập</a>
+    </label>
+  </div>
+  
+  <button class="btn btn-primary btn-block" [disabled]="!form.valid" type="submit">
+    Xác nhận đăng ký
+  </button>
+</form>
