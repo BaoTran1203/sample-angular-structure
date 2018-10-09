@@ -1,0 +1,25 @@
+.login-branding {
+  margin: 48px auto 16px;
+  
+  img {
+    max-width: 120px;
+  }
+}
+
+.login-page {
+  padding-top: 80px;
+  padding-bottom: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  
+  background: url('../../../../assets/images/background/background-01.jpeg') center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  
+  //.text-right {
+  //  text-align: right;
+  //}
+}

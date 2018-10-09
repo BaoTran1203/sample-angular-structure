@@ -1,25 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { enableProdMode, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { TemplateModule } from './template/template.module';
 import { ModulesModule } from './modules/modules.module';
 import { AppRoutingModule } from './app-routing.module';
+
+if (environment.production) {
+  enableProdMode();
+}
 
 @NgModule({
   declarations : [
     AppComponent
   ],
   imports : [
+    // Core Module
     BrowserModule,
-    NgbModule,
-    CoreModule,
     RouterModule,
-    TemplateModule,
+
+    // Main Module
+    CoreModule,
     AppRoutingModule,
     ModulesModule
+
+    // Libs Module
+
 
   ],
   providers : [],
