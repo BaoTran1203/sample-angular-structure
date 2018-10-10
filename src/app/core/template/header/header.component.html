@@ -1,56 +1,57 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/dashboard">ezPark</a>
-    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
-            (click)="isShowMobileMenu = !isShowMobileMenu"
-            data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div [class.show]="isShowMobileMenu"
-         class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="/dashboard">
-            Bảng điều khiển
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/revision/list">
-            Tài khoản chờ duyệt
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/order/list">
-            Đơn đặt hàng
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/notification/list">
-            Thông báo
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/configuration">Cấu hình</a>
-        </li>
-      </ul>
-      
-      <ul class="navbar-nav">
-        <li ngbDropdown class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" ngbDropdownToggle
-             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Xin chào @{{profile.fullName}}
-          </a>
-          <div class="dropdown-menu pull-right" ngbDropdownMenu>
-            <a class="dropdown-item" routerLink="/profile/info">Thông tin cá nhân</a>
-            <a class="dropdown-item" routerLink="/profile/setting">Cài đặt</a>
-            <a class="dropdown-item" routerLink="/profile/password">Đổi mật khẩu</a>
-            <hr/>
-            <a class="dropdown-item" (click)="signOut()">Đăng xuất</a>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <!--<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"-->
+            <!--(click)="isShowMobileMenu = !isShowMobileMenu"-->
+            <!--data-target="#navbarsExampleDefault"-->
+            <!--aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">-->
+      <!--<span class="navbar-toggler-icon"></span>-->
+    <!--</button>-->
+    <!---->
+    <!--<div [class.show]="isShowMobileMenu"-->
+         <!--class="collapse navbar-collapse" id="navbarsExampleDefault">-->
+      <!--<ul class="navbar-nav mr-auto">-->
+        <!--<li class="nav-item active">-->
+          <!--<a class="nav-link" routerLink="/dashboard">-->
+            <!--Bảng điều khiển-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item">-->
+          <!--<a class="nav-link" routerLink="/revision/list">-->
+            <!--Tài khoản chờ duyệt-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item">-->
+          <!--<a class="nav-link" routerLink="/order/list">-->
+            <!--Đơn đặt hàng-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item">-->
+          <!--<a class="nav-link" routerLink="/notification/list">-->
+            <!--Thông báo-->
+          <!--</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item">-->
+          <!--<a class="nav-link" routerLink="/configuration">Cấu hình</a>-->
+        <!--</li>-->
+      <!--</ul>-->
+      <!---->
+      <!--<ul class="navbar-nav">-->
+        <!--<li ngbDropdown class="nav-item dropdown">-->
+          <!--<a class="nav-link dropdown-toggle" ngbDropdownToggle-->
+             <!--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+            <!--Xin chào ABC-->
+            <!--&lt;!&ndash;@{{profile.fullName}}&ndash;&gt;-->
+          <!--</a>-->
+          <!--<div class="dropdown-menu pull-right" ngbDropdownMenu>-->
+            <!--<a class="dropdown-item" routerLink="/profile/info">Thông tin cá nhân</a>-->
+            <!--<a class="dropdown-item" routerLink="/profile/setting">Cài đặt</a>-->
+            <!--<a class="dropdown-item" routerLink="/profile/password">Đổi mật khẩu</a>-->
+            <!--<hr/>-->
+            <!--<a class="dropdown-item" (click)="signOut()">Đăng xuất</a>-->
+          <!--</div>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
   </div>
 </nav>

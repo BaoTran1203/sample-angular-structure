@@ -12,9 +12,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     CommonModule,
     RouterModule
   ],
-  exports : [
-    RouterModule,
-  ],
   declarations : [
     HomeTemplateComponent,
     MainTemplateComponent,
