@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { TemplateModule } from './core/template/template.module';
 import { ModulesModule } from './modules/modules.module';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -23,10 +24,10 @@ if (environment.production) {
     // Main Module
     CoreModule,
     AppRoutingModule,
-    ModulesModule
+    ModulesModule,
+    TemplateModule
 
     // Libs Module
-
 
   ],
   providers : [],
