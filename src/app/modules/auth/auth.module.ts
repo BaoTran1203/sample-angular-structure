@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../core/http/auth.service';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -12,13 +13,16 @@ import { ResetComponent } from './reset/reset.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthRoutingModule,
+    AuthRoutingModule
   ],
   declarations : [
     LoginComponent,
     RegisterComponent,
     ForgotComponent,
     ResetComponent
+  ],
+  providers : [
+    AuthService
   ]
 })
 

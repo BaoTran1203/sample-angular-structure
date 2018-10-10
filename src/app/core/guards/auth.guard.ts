@@ -1,35 +1,36 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-
-// import {AccountService} from '../shared/api/account.service';
+import { AuthService } from '../http/auth.service';
+import { TokenService } from '../services/token.service';
 
 @Injectable({providedIn : 'root'})
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router
-              // private accountService: AccountService
-  ) {
+  constructor(private router: Router,
+              private authService: AuthService,
+              private tokenService: TokenService) {
   }
 
   canActivate() {
-    if (!window.localStorage.getItem('TOKEN_KEY')) {
-      this.router.navigate(['/auth/login']);
+    if (!this.tokenService.get()) {
+      this.router.navigate(['/auth/login']).then().catch();
       return false;
     }
 
-    // this.accountService.profile()
-    //   .subscribe(
-    //     (resp: any) => {
-    //       if (!resp.status) {
-    //         this.router.navigate(['/auth/login']);
-    //         return false;
-    //       }
-    //     },
-    //     (err) => {
-    //       console.log('Can Activate Error', err);
-    //       this.router.navigate(['/auth/login']);
-    //       return false;
-    //     });
+    this.authService.profile()
+      .subscribe(
+        (resp: any) => {
+          if (!resp.status) {
+            this.router.navigate(['/auth/login']).then().catch();
+            return false;
+          }
+        },
+
+        (err: any) => {
+          console.log('Can Activate Error', err);
+          this.router.navigate(['/auth/login']).then().catch();
+          return false;
+        });
 
     return true;
   }
