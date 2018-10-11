@@ -1,7 +1,10 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { enableProdMode, NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { Ng4LoadingSpinnerModule, Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -24,15 +27,17 @@ if (environment.production) {
     BrowserModule,
     RouterModule,
     HttpClientModule,
+    BrowserAnimationsModule,
 
     // Main Module
     CoreModule,
     AppRoutingModule,
     ModulesModule,
-    TemplateModule
+    TemplateModule,
 
     // Libs Module
-
+    ToasterModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers : [
     {
@@ -44,10 +49,12 @@ if (environment.production) {
       provide : HTTP_INTERCEPTORS,
       useClass : JwtInterceptor,
       multi : true
-    }
+    },
+    ToasterService,
+    Ng4LoadingSpinnerService
   ],
   bootstrap : [AppComponent]
 })
-export class AppModule {
 
+export class AppModule {
 }
