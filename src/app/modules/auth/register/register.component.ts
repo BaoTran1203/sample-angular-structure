@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { AuthService } from '../../../core/http/auth.service';
 
 @Component({
   selector : 'app-register',
@@ -11,7 +15,12 @@ export class RegisterComponent implements OnInit {
 
   public form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private toast: ToasterService,
+              private router: Router,
+              private spinnerService: Ng4LoadingSpinnerService) {
+  }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -50,7 +59,35 @@ export class RegisterComponent implements OnInit {
    *
    */
   public onSubmit() {
-    console.log(this.data);
-    alert('Register Success');
+    this.spinnerService.show();
+    this.authService.register(this.data)
+      .subscribe(
+        (resp: any) => {
+          this.hideSpinner();
+          if (!resp.status) {
+            this.toast.pop('warning', resp.name, resp.msg);
+            return;
+          }
+
+          this.toast.pop('success', 'Success', resp.msg);
+          setTimeout(() => {
+            this.router.navigate(['/auth/login']).then().catch();
+          }, 400);
+        },
+
+        (err: any) => {
+          this.hideSpinner();
+          console.log('err', err);
+          this.toast.pop('error', 'Error', err.message);
+        });
+  }
+
+  /**
+   * Hide loading spinner with a timeout
+   */
+  private hideSpinner() {
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 1200);
   }
 }

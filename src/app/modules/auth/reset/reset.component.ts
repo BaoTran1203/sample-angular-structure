@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector : 'app-reset',
@@ -15,7 +16,8 @@ export class ResetComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private spinnerService: Ng4LoadingSpinnerService) {
   }
 
   ngOnInit() {
@@ -44,10 +46,20 @@ export class ResetComponent implements OnInit {
    *
    */
   public onSubmit() {
+    this.spinnerService.show();
     alert('Khôi phục mật khẩu thành công. Vui lòng đăng nhập lại.');
     setTimeout(() => {
       this.router.navigate(['/auth/login']).then().catch();
     }, 400);
+    this.hideSpinner();
   }
 
+  /**
+   * Hide loading spinner with a timeout
+   */
+  private hideSpinner() {
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 1200);
+  }
 }

@@ -18,18 +18,22 @@ const routes: Routes = [
   {
     path : 'user',
     component : MainTemplateComponent,
-    loadChildren : () => UserModule
+    loadChildren : () => UserModule,
+    canActivate : [AuthGuard]
   },
   {
     path : 'category',
     component : MainTemplateComponent,
-    loadChildren : () => CategoryModule
+    loadChildren : () => CategoryModule,
+    canActivate : [AuthGuard]
   },
   {
     path : 'product',
     component : MainTemplateComponent,
-    loadChildren : () => ProductModule
-  }
+    loadChildren : () => ProductModule,
+    canActivate : [AuthGuard]
+  },
+  {path : '**', redirectTo : ''}
 ];
 
 @NgModule({
@@ -40,5 +44,6 @@ const routes: Routes = [
   providers : [AuthGuard],
   declarations : []
 })
+
 export class AppRoutingModule {
 }

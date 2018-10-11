@@ -1,6 +1,4 @@
-<!--<toaster-container></toaster-container>-->
-
-<form class="form-register" [formGroup]="form" (ngSubmit)="onSubmit(form)">
+<form class="form-register" [formGroup]="form" (ngSubmit)="onSubmit()">
   <h2>
     Đăng ký tài khoản
   </h2>
@@ -62,7 +60,7 @@
   <!-- ./form-group -->
   
   <div class="form-group">
-    <label>Mật khẩu</label>
+    <label>Mật khẩu xác nhận</label>
     
     <input type="password" class="form-control" ngbButton formControlName="confirm_password" title="">
     
@@ -71,8 +69,8 @@
         Vui lòng nhập mật khẩu xác nhận
       </small>
     </p>
-  
-    <p *ngIf="confirm_password.valid && (confirm_password.dirty || confirm_password.touched)" class="text-danger">
+    
+    <p *ngIf="(confirm_password.invalid && (confirm_password.dirty || confirm_password.touched)) || form.errors" class="text-danger">
       <small *ngIf="form.errors['mismatch']">
         Mật khẩu xác nhận không chính xác
       </small>

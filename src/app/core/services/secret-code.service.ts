@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-const KEY = 'TOKEN_KEY';
+const KEY = 'SECRET_CODE';
 
 @Injectable({providedIn : 'root'})
-export class TokenService {
+export class SecretCodeService {
 
   constructor() { }
 
