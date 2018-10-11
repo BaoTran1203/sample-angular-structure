@@ -1,15 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CONFIG } from '../../configs/config';
+import { environment } from '../../../environments/environment';
 import * as $ from 'jquery';
 
-@Injectable({
-  providedIn: 'root'
-})
-
+@Injectable({providedIn : 'root'})
 export class CategoryService {
 
-  private url_endPoint = `${CONFIG.apiUrl}/category`;
+  private url_endPoint = `${environment.url}/category`;
 
   constructor(public http: HttpClient) {
   }

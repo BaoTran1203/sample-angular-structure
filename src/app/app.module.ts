@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 if (environment.production) {
   enableProdMode();
 }
+console.log('environment', environment);
 
 @NgModule({
   declarations : [

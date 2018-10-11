@@ -1,15 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CONFIG } from '../../configs/config';
+import { environment } from '../../../environments/environment';
 import * as $ from 'jquery';
 
-@Injectable({
-  providedIn : 'root'
-})
-
+@Injectable({providedIn : 'root'})
 export class UserService {
 
-  private url_endPoint = `${CONFIG.apiUrl}/user`;
+  private url_endPoint = `${environment.url}/user`;
 
   constructor(public http: HttpClient) {
   }
