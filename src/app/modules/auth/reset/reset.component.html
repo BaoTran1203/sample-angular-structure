@@ -1,22 +1,46 @@
-<div *ngIf="!key || key != 'abcxyz'" class="form-reset">
-  <h2>
-    Mã xác nhận không hợp lệ. <br>Vui lòng kiểm tra lại
-  </h2>
-</div>
-
-<form *ngIf="key === 'abcxyz'" class="form-reset" [formGroup]="form" (ngSubmit)="onSubmit(form)">
+<form class="form-reset" [formGroup]="form" (ngSubmit)="onSubmit(form)">
   <h2>
     Khôi phục mật khẩu
   </h2>
   
   <div class="form-group">
+    <label>Địa chỉ Email</label>
+    
+    <input type="text" class="form-control" formControlName="email" title="">
+    
+    <p *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+      <small *ngIf="email.errors.required">
+        Vui lòng nhập email
+      </small>
+      
+      <small *ngIf="email.errors.email">
+        Email không đúng định dạng
+      </small>
+    </p>
+  </div>
+  <!-- ./form-group -->
+  
+  <div class="form-group">
+    <label>Mã xác nhận</label>
+    
+    <input type="text" class="form-control" formControlName="accessCode" title="">
+    
+    <p *ngIf="accessCode.invalid && (accessCode.dirty || accessCode.touched)" class="text-danger">
+      <small *ngIf="accessCode.errors.required">
+        Vui lòng nhập mã xác nhận
+      </small>
+    </p>
+  </div>
+  <!-- ./form-group -->
+  
+  <div class="form-group">
     <label>Mật khẩu</label>
     
-    <input type="password" class="form-control" ngbButton formControlName="password" title="">
+    <input type="password" class="form-control" ngbButton formControlName="new_password" title="">
     
-    <p *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
-      <small *ngIf="password.errors.required">
-        Vui lòng nhập mật khẩu
+    <p *ngIf="new_password.invalid && (new_password.dirty || new_password.touched)" class="text-danger">
+      <small *ngIf="new_password.errors.required">
+        Vui lòng nhập mật khẩu mới
       </small>
     </p>
   </div>

@@ -56,30 +56,26 @@ export class RegisterComponent implements OnInit {
   get confirm_password(): any { return this.form.get('confirm_password'); }
 
   /**
-   *
+   * Submit Form
    */
   public onSubmit() {
     this.spinnerService.show();
-    this.authService.register(this.data)
-      .subscribe(
-        (resp: any) => {
-          this.hideSpinner();
-          if (!resp.status) {
-            this.toast.pop('warning', resp.name, resp.msg);
-            return;
-          }
+    this.authService.register(this.data).subscribe(
+      (resp: any) => {
+        if (!resp.status) {
+          this.toast.pop('warning', resp.name, resp.msg);
+          return;
+        }
 
-          this.toast.pop('success', 'Success', resp.msg);
-          setTimeout(() => {
-            this.router.navigate(['/auth/login']).then().catch();
-          }, 400);
-        },
+        this.toast.pop('success', 'Success', resp.msg);
+        setTimeout(() => {
+          this.router.navigate(['/auth/login']).then().catch();
+        }, 400);
+      },
 
-        (err: any) => {
-          this.hideSpinner();
-          console.log('err', err);
-          this.toast.pop('error', 'Error', err.message);
-        });
+      (err: any) => this.toast.pop('error', 'Error', err.message),
+      () => this.hideSpinner()
+    );
   }
 
   /**

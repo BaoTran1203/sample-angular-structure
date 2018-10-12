@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
-    this.authService.profile()
+    this.authService.getProfile()
       .subscribe(
         (resp: any) => {
           if (!resp.status) {
@@ -32,7 +32,8 @@ export class AuthGuard implements CanActivate {
           console.log('AuthGuard', err);
           this.backToLoginPage();
           return false;
-        });
+        }
+      );
 
     return true;
   }

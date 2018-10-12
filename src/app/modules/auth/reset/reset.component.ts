@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { AuthService } from '../../../core/http/auth.service';
 
 @Component({
   selector : 'app-reset',
@@ -12,24 +14,28 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 export class ResetComponent implements OnInit {
 
   public form: FormGroup;
-  public key: string = '';
+  public _email: string = '';
+  public _accessCode: string = '';
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private spinnerService: Ng4LoadingSpinnerService) {
+              private spinnerService: Ng4LoadingSpinnerService,
+              private authService: AuthService,
+              private toast: ToasterService) {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-        if (params['key']) {
-          this.key = params['key'];
-        }
-      }
-    );
+    this.route.queryParamMap.subscribe(params => {
+      let query: any = {...params.keys, ...params};
+      this._email = query.params.email || '';
+      this._accessCode = query.params.accessCode || '';
+    });
 
     this.form = this.fb.group({
-      password : ['', [Validators.required, Validators.minLength(6)]],
+      email : [this._email, [Validators.required, Validators.email]],
+      accessCode : [this._accessCode, [Validators.required]],
+      new_password : ['', [Validators.required, Validators.minLength(6)]],
       confirm_password : ['', [Validators.required]]
     });
   }
@@ -38,20 +44,35 @@ export class ResetComponent implements OnInit {
 
   set data(data: any) { this.form.patchValue(data); }
 
-  get password(): any { return this.form.get('password'); }
+  get email(): any { return this.form.get('email'); }
+
+  get accessCode(): any { return this.form.get('accessCode'); }
+
+  get new_password(): any { return this.form.get('new_password'); }
 
   get confirm_password(): any { return this.form.get('confirm_password'); }
 
   /**
-   *
+   * Submit Form
    */
   public onSubmit() {
     this.spinnerService.show();
-    alert('Khôi phục mật khẩu thành công. Vui lòng đăng nhập lại.');
-    setTimeout(() => {
-      this.router.navigate(['/auth/login']).then().catch();
-    }, 400);
-    this.hideSpinner();
+    this.authService.reset(this.data).subscribe(
+      (resp: any) => {
+        if (!resp.status) {
+          this.toast.pop('warning', resp.name, resp.msg);
+          return;
+        }
+
+        this.toast.pop('success', 'Success', resp.msg);
+        setTimeout(() => {
+          this.router.navigate(['/auth/login']).catch().then();
+        }, 400);
+      },
+
+      (err: any) => this.toast.pop('error', 'Error', err.message),
+      () => this.hideSpinner()
+    );
   }
 
   /**

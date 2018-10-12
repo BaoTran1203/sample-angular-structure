@@ -18,7 +18,7 @@ export class HomeTemplateComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    if (!this.token.has || !this.secretCode.has) {
+    if (this.token.has && this.secretCode.has) {
       this.router.navigate(['/product/list']).then().catch();
       return;
     }

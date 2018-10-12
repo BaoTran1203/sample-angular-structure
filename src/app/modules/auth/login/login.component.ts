@@ -43,31 +43,29 @@ export class LoginComponent implements OnInit {
   get password(): any { return this.form.get('password'); }
 
   /**
-   *
+   * Submit Form
    */
   public onSubmit() {
     this.spinnerService.show();
-    this.authService.login(this.data)
-      .subscribe(
-        (resp: any) => {
-          this.hideSpinner();
-          if (!resp.status) {
-            this.toast.pop('warning', resp.name, resp.msg);
-            return;
-          }
+    this.authService.login(this.data).subscribe(
+      (resp: any) => {
+        if (!resp.status) {
+          this.toast.pop('warning', resp.name, resp.msg);
+          return;
+        }
 
-          this.toast.pop('success', 'Success', 'Đăng nhập thành công vào hệ thống.');
-          setTimeout(() => {
-            this.token.save = resp.token;
-            this.secretCode.save = resp.secretCode;
-            this.router.navigate(['/product/list']).then().catch();
-          }, 400);
-        },
+        this.toast.pop('success', 'Success', resp.msg);
+        this.token.save = resp.token;
+        this.secretCode.save = resp.secretCode;
 
-        (err: any) => {
-          this.hideSpinner();
-          this.toast.pop('error', 'Error', err.message);
-        });
+        setTimeout(() => {
+          this.router.navigate(['/product/list']).then().catch();
+        }, 400);
+      },
+
+      (err: any) => this.toast.pop('error', 'Error', err.message),
+      () => this.hideSpinner()
+    );
   }
 
   /**

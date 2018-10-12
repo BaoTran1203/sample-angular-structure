@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToasterService } from 'angular2-toaster';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { AuthService } from '../../../core/http/auth.service';
 
 @Component({
   selector : 'app-forgot',
   templateUrl : './forgot.component.html',
   styleUrls : ['./forgot.component.scss']
 })
+
 export class ForgotComponent implements OnInit {
 
   public form: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private spinnerService: Ng4LoadingSpinnerService) { }
+              private spinnerService: Ng4LoadingSpinnerService,
+              private authService: AuthService,
+              private toast: ToasterService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -27,12 +32,24 @@ export class ForgotComponent implements OnInit {
   get email(): any { return this.form.get('email'); }
 
   /**
-   *
+   * Submit Form
    */
   public onSubmit() {
     this.spinnerService.show();
-    alert('Mã xác nhận đã được gửi về email của bạn.');
-    this.hideSpinner();
+    this.authService.forgot(this.data).subscribe(
+      (resp: any) => {
+        if (!resp.status) {
+          this.toast.pop('warning', resp.name, resp.msg);
+          return;
+        }
+
+        this.toast.pop('success', 'Success', resp.msg);
+        console.log('URL', resp.url);
+      },
+
+      (err: any) => this.toast.pop('error', 'Error', err.message),
+      () => this.hideSpinner()
+    );
   }
 
   /**
