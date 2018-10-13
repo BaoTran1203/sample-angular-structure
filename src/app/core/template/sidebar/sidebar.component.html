@@ -1,28 +1,28 @@
 <div class="core-dashboard">
   <div class="sidebar">
-  
+    
     <!--<h3>Marketing</h3>-->
     <!--<ul>-->
-      <!--<li data-menu-item="newsfeed-list">-->
-        <!--<a routerLink="/newsfeed/list">-->
-          <!--<i class="icon mdi mdi-pencil-box"></i>-->
-          <!--<span>Sản phẩm mới</span>-->
-        <!--</a>-->
-      <!--</li>-->
-  <!---->
-      <!--<li data-menu-item="newsfeed-list">-->
-        <!--<a routerLink="/newsfeed/list">-->
-          <!--<i class="icon mdi mdi-pencil-box"></i>-->
-          <!--<span>Đang giảm giá</span>-->
-        <!--</a>-->
-      <!--</li>-->
-  <!---->
-      <!--<li data-menu-item="newsfeed-list">-->
-        <!--<a routerLink="/newsfeed/list">-->
-          <!--<i class="icon mdi mdi-pencil-box"></i>-->
-          <!--<span>Yêu thích</span>-->
-        <!--</a>-->
-      <!--</li>-->
+    <!--<li data-menu-item="newsfeed-list">-->
+    <!--<a routerLink="/newsfeed/list">-->
+    <!--<i class="icon mdi mdi-pencil-box"></i>-->
+    <!--<span>Sản phẩm mới</span>-->
+    <!--</a>-->
+    <!--</li>-->
+    <!---->
+    <!--<li data-menu-item="newsfeed-list">-->
+    <!--<a routerLink="/newsfeed/list">-->
+    <!--<i class="icon mdi mdi-pencil-box"></i>-->
+    <!--<span>Đang giảm giá</span>-->
+    <!--</a>-->
+    <!--</li>-->
+    <!---->
+    <!--<li data-menu-item="newsfeed-list">-->
+    <!--<a routerLink="/newsfeed/list">-->
+    <!--<i class="icon mdi mdi-pencil-box"></i>-->
+    <!--<span>Yêu thích</span>-->
+    <!--</a>-->
+    <!--</li>-->
     <!--</ul>-->
     
     <h3>Danh mục</h3>
@@ -30,23 +30,18 @@
       <li data-menu-item="dashboard" class="active">
         <a routerLink="/dashboard">
           <i class="icon mdi mdi-view-dashboard"></i>
-          <span>Bảng điều khiển</span>
+          <span>Tất cả</span>
         </a>
       </li>
       
-      <li data-menu-item="transaction-list">
-        <a routerLink="/transaction/list">
-          <i class="icon mdi mdi-cards"></i>
-          <span>Lịch sử giao dịch</span>
-        </a>
-      </li>
-      
-      <li data-menu-item="order-list">
-        <a routerLink="/order/list">
-          <i class="icon mdi mdi-car-connected"></i>
-          <span>Đơn đặt hàng</span>
-        </a>
-      </li>
+      <ng-container *ngFor="let item of items">
+        <li [attr.data-menu]="item.slug">
+          <a>
+            <i class="icon mdi mdi-cards"></i>
+            <span>{{ item.title }}</span>
+          </a>
+        </li>
+      </ng-container>
     </ul>
   </div>
   

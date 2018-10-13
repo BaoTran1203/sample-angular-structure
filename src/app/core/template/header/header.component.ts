@@ -22,6 +22,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.getProfile().subscribe(
+      (resp: any) => {
+        this.profile = resp.status ? (resp.data || {}) : {};
+      }
+    );
   }
 
   signOut() {

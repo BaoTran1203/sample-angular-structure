@@ -12,12 +12,12 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/revision/list">
-            Khuyến mãi
+            Sản phảm yêu thích
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/notification/list">
-            Thông báo
+            Giỏ hàng
           </a>
         </li>
       </ul>
@@ -26,12 +26,10 @@
         <li ngbDropdown class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" ngbDropdownToggle
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Xin chào [ABC]
-            <!--@{{profile.fullName}}-->
+            Xin chào @{{profile.fullName}}
           </a>
           <div class="dropdown-menu pull-right" ngbDropdownMenu>
-            <a class="dropdown-item" routerLink="/profile/info">Thông tin cá nhân</a>
-            <a class="dropdown-item" routerLink="/profile/setting">Cài đặt</a>
+            <a class="dropdown-item" routerLink="/profile/form">Thông tin cá nhân</a>
             <a class="dropdown-item" routerLink="/profile/password">Đổi mật khẩu</a>
             <hr/>
             <a class="dropdown-item" (click)="signOut()">Đăng xuất</a>

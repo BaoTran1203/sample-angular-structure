@@ -1,26 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../../../core/http/auth.service';
 
 @Component({
-  selector : 'app-forgot',
-  templateUrl : './forgot.component.html',
-  styleUrls : ['./forgot.component.scss']
+  selector : 'app-profile-form',
+  templateUrl : './profile-form.component.html',
+  styleUrls : ['./profile-form.component.scss']
 })
 
-export class ForgotComponent implements OnInit {
+export class ProfileFormComponent implements OnInit {
 
   public form: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private spinnerService: Ng4LoadingSpinnerService,
               private authService: AuthService,
-              private toast: ToasterService) { }
+              private toast: ToasterService,
+              private router: Router,
+              private loading: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
     this.buildForm();
+    this.getProfile();
   }
 
   /**
@@ -28,7 +31,9 @@ export class ForgotComponent implements OnInit {
    */
   private buildForm() {
     this.form = this.fb.group({
-      email : ['', [Validators.required, Validators.email]]
+      email : ['', [Validators.required, Validators.email]],
+      fullName : ['', [Validators.required]],
+      phone : ['', [Validators.required]]
     });
   }
 
@@ -38,20 +43,34 @@ export class ForgotComponent implements OnInit {
 
   get email(): any { return this.form.get('email'); }
 
+  get fullName(): any { return this.form.get('fullName'); }
+
+  get phone(): any { return this.form.get('phone'); }
+
+  /**
+   * Get data form API
+   */
+  private getProfile() {
+    this.authService.getProfile().subscribe(
+      (resp: any) => {
+        if (resp.status) {
+          this.data = resp.data || {};
+        }
+      });
+  }
+
   /**
    * Submit Form
    */
   public onSubmit() {
-    this.spinnerService.show();
-    this.authService.forgot(this.data).subscribe(
+    this.loading.show();
+    this.authService.profile(this.data).subscribe(
       (resp: any) => {
         if (!resp.status) {
           this.toast.pop('warning', resp.name, resp.msg);
           return;
         }
-
         this.toast.pop('success', 'Success', resp.msg);
-        console.log('URL', resp.url);
       },
 
       (err: any) => this.toast.pop('error', 'Error', err.message),
@@ -64,7 +83,7 @@ export class ForgotComponent implements OnInit {
    */
   private hideSpinner() {
     setTimeout(() => {
-      this.spinnerService.hide();
+      this.loading.hide();
     }, 1200);
   }
 }

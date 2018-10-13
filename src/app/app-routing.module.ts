@@ -4,6 +4,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { AuthModule } from './modules/auth/auth.module';
 import { CategoryModule } from './modules/category/category.module';
 import { ProductModule } from './modules/product/product.module';
+import { ProfileModule } from './modules/profile/profile.module';
 import { UserModule } from './modules/user/user.module';
 import { HomeTemplateComponent } from './core/template/home-template/home-template.component';
 import { MainTemplateComponent } from './core/template/main-template/main-template.component';
@@ -14,6 +15,12 @@ const routes: Routes = [
     path : 'auth',
     component : HomeTemplateComponent,
     loadChildren : () => AuthModule
+  },
+  {
+    path : 'profile',
+    component : MainTemplateComponent,
+    loadChildren : () => ProfileModule,
+    canActivate : [AuthGuard]
   },
   {
     path : 'user',

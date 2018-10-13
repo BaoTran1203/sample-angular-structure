@@ -19,10 +19,17 @@ export class RegisterComponent implements OnInit {
               private authService: AuthService,
               private toast: ToasterService,
               private router: Router,
-              private spinnerService: Ng4LoadingSpinnerService) {
+              private loading: Ng4LoadingSpinnerService) {
   }
 
   ngOnInit() {
+    this.buildForm();
+  }
+
+  /**
+   * Generate Form
+   */
+  private buildForm() {
     this.form = this.fb.group({
       email : ['', [Validators.required, Validators.email]],
       fullName : ['', [Validators.required]],
@@ -32,6 +39,10 @@ export class RegisterComponent implements OnInit {
     }, {validator : this.validate});
   }
 
+  /**
+   * Custom validator form
+   * @param control
+   */
   private validate(control: FormGroup) {
     let password = control.get('password');
     let confirm_password = control.get('confirm_password');
@@ -59,7 +70,7 @@ export class RegisterComponent implements OnInit {
    * Submit Form
    */
   public onSubmit() {
-    this.spinnerService.show();
+    this.loading.show();
     this.authService.register(this.data).subscribe(
       (resp: any) => {
         if (!resp.status) {
@@ -83,7 +94,7 @@ export class RegisterComponent implements OnInit {
    */
   private hideSpinner() {
     setTimeout(() => {
-      this.spinnerService.hide();
+      this.loading.hide();
     }, 1200);
   }
 }

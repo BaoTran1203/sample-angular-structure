@@ -14,7 +14,7 @@ export class CategoryService {
 
   list(params: any): Observable<Object> {
     const query = $.param(params);
-    const url = `${this.url_endPoint}?${query}`;
+    const url = `${environment.url}/categories?${query}`;
     return this.http.get(url);
   }
 
