@@ -20,9 +20,6 @@ import { ResetComponent } from './reset/reset.component';
     RegisterComponent,
     ForgotComponent,
     ResetComponent
-  ],
-  providers : [
-    AuthService
   ]
 })
 

@@ -39,6 +39,8 @@ export class AuthGuard implements CanActivate {
   }
 
   private backToLoginPage() {
+    this.token.delete;
+    this.secretCode.delete;
     setTimeout(() => {
       this.router.navigate(['/auth/login']).then().catch();
     }, 400);

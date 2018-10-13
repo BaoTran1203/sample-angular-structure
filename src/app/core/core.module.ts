@@ -8,10 +8,7 @@ import { TemplateModule } from './template/template.module';
     CommonModule,
     RouterModule,
     TemplateModule
-  ],
-  exports : [],
-  declarations : [],
-  entryComponents : []
+  ]
 })
 
 export class CoreModule {

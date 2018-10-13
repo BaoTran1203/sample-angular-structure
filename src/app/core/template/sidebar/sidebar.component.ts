@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ToasterService } from 'angular2-toaster';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CategoryService } from '../../http/category.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector : 'app-sidebar',
@@ -14,8 +14,9 @@ export class SidebarComponent implements OnInit {
   public items: any[] = [];
 
   constructor(private loading: Ng4LoadingSpinnerService,
-              private toast: ToasterService,
-              private categoryService: CategoryService) { }
+              private toast: ToastService,
+              private categoryService: CategoryService) {
+  }
 
   ngOnInit() {
     this.loading.show();
@@ -27,13 +28,13 @@ export class SidebarComponent implements OnInit {
     this.categoryService.list(query).subscribe(
       (resp: any) => {
         if (!resp.status) {
-          this.toast.pop('warning', resp.name, resp.msg);
+          this.toast.warning(resp.msg, resp.name);
           return;
         }
         this.items = resp.data;
       },
 
-      (err: any) => this.toast.pop('error', 'Error', err.message),
+      (err: any) => this.toast.error(err.message),
       () => this.hideSpinner()
     );
   }

@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { ToastService } from './core/services/toast.service';
 import { TemplateModule } from './core/template/template.module';
 import { ModulesModule } from './modules/modules.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +18,6 @@ import { AppRoutingModule } from './app-routing.module';
 if (environment.production) {
   enableProdMode();
 }
-console.log('environment', environment);
 
 @NgModule({
   declarations : [
@@ -52,6 +52,7 @@ console.log('environment', environment);
       multi : true
     },
     ToasterService,
+    ToastService,
     Ng4LoadingSpinnerService
   ],
   bootstrap : [AppComponent]

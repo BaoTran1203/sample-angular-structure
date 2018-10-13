@@ -5,6 +5,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductFormComponent } from './product-form/product-form.component';
+import { ProductSearchFormComponent } from './product-search-form/product-search-form.component';
 
 @NgModule({
   imports : [
@@ -15,9 +16,9 @@ import { ProductFormComponent } from './product-form/product-form.component';
   declarations : [
     ProductDetailComponent,
     ProductListComponent,
-    ProductFormComponent
-  ],
-  exports : []
+    ProductFormComponent,
+    ProductSearchFormComponent
+  ]
 })
 
 export class ProductModule {

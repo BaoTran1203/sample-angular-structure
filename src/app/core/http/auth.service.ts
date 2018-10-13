@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { AuthModule } from '../../modules/auth/auth.module';
+import { UserModule } from '../../modules/user/user.module';
 
-@Injectable()
+@Injectable({providedIn : 'root'})
 export class AuthService {
 
   constructor(private http: HttpClient) {
@@ -21,7 +23,7 @@ export class AuthService {
 
   password(model: any): Observable<Object> {
     let url = `${environment.url}/password`;
-    return this.http.post(url, model);
+    return this.http.put(url, model);
   }
 
   getProfile(): Observable<Object> {
@@ -31,7 +33,7 @@ export class AuthService {
 
   profile(model: any): Observable<Object> {
     let url = `${environment.url}/profile`;
-    return this.http.post(url, model);
+    return this.http.put(url, model);
   }
 
   logout(): Observable<Object> {
@@ -46,6 +48,6 @@ export class AuthService {
 
   reset(model: any): Observable<Object> {
     let url = `${environment.url}/reset`;
-    return this.http.post(url, model);
+    return this.http.put(url, model);
   }
 }

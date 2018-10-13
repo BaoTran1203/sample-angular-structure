@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToasterService } from 'angular2-toaster';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../../../core/http/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector : 'app-reset',
@@ -20,7 +20,7 @@ export class ResetComponent implements OnInit {
               private router: Router,
               private spinnerService: Ng4LoadingSpinnerService,
               private authService: AuthService,
-              private toast: ToasterService) {
+              private toast: ToastService) {
   }
 
   ngOnInit() {
@@ -73,17 +73,17 @@ export class ResetComponent implements OnInit {
     this.authService.reset(this.data).subscribe(
       (resp: any) => {
         if (!resp.status) {
-          this.toast.pop('warning', resp.name, resp.msg);
+          this.toast.warning(resp.msg, resp.name);
           return;
         }
 
-        this.toast.pop('success', 'Success', resp.msg);
+        this.toast.success(resp.msg);
         setTimeout(() => {
           this.router.navigate(['/auth/login']).catch().then();
         }, 400);
       },
 
-      (err: any) => this.toast.pop('error', 'Error', err.message),
+      (err: any) => this.toast.error(err.message),
       () => this.hideSpinner()
     );
   }

@@ -1,1 +1,17 @@
-<app-breadcrumb [title]="'Sản phẩm điện tử'"></app-breadcrumb>
+<div class="page-header">
+  <h1>Heading</h1>
+</div>
+<!-- /.page-header -->
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a routerLink="/">Quản trị</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a routerLink="/category/list">Danh mục</a>
+  </li>
+  <li class="breadcrumb-item active">Danh sách</li>
+</ol>
+<!-- /.breadcrumb -->
+
+<app-product-search-form></app-product-search-form>

@@ -14,8 +14,7 @@ import { ProfileModule } from './profile/profile.module';
     ProductModule,
     CategoryModule,
     ProfileModule
-  ],
-  declarations : []
+  ]
 })
 
 export class ModulesModule {

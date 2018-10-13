@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToasterService } from 'angular2-toaster';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../../../core/http/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector : 'app-profile-form',
@@ -17,7 +17,7 @@ export class ProfileFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
-              private toast: ToasterService,
+              private toast: ToastService,
               private router: Router,
               private loading: Ng4LoadingSpinnerService) { }
 
@@ -67,13 +67,13 @@ export class ProfileFormComponent implements OnInit {
     this.authService.profile(this.data).subscribe(
       (resp: any) => {
         if (!resp.status) {
-          this.toast.pop('warning', resp.name, resp.msg);
+          this.toast.warning(resp.msg, resp.name);
           return;
         }
-        this.toast.pop('success', 'Success', resp.msg);
+        this.toast.success(resp.msg);
       },
 
-      (err: any) => this.toast.pop('error', 'Error', err.message),
+      (err: any) => this.toast.error(err.message),
       () => this.hideSpinner()
     );
   }

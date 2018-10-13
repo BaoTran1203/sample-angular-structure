@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToasterService } from 'angular2-toaster';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../../../core/http/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector : 'app-forgot',
@@ -17,7 +17,7 @@ export class ForgotComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private spinnerService: Ng4LoadingSpinnerService,
               private authService: AuthService,
-              private toast: ToasterService) { }
+              private toast: ToastService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -46,15 +46,15 @@ export class ForgotComponent implements OnInit {
     this.authService.forgot(this.data).subscribe(
       (resp: any) => {
         if (!resp.status) {
-          this.toast.pop('warning', resp.name, resp.msg);
+          this.toast.warning(resp.msg, resp.name);
           return;
         }
 
-        this.toast.pop('success', 'Success', resp.msg);
+        this.toast.success(resp.msg);
         console.log('URL', resp.url);
       },
 
-      (err: any) => this.toast.pop('error', 'Error', err.message),
+      (err: any) => this.toast.error(err.message),
       () => this.hideSpinner()
     );
   }

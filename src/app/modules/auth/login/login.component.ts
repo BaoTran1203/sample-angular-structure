@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToasterService } from 'angular2-toaster';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../../../core/http/auth.service';
 import { SecretCodeService } from '../../../core/services/secret-code.service';
+import { ToastService } from '../../../core/services/toast.service';
 import { TokenService } from '../../../core/services/token.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
               private authService: AuthService,
               private token: TokenService,
               private secretCode: SecretCodeService,
-              private toast: ToasterService,
+              private toast: ToastService,
               private router: Router,
               private spinnerService: Ng4LoadingSpinnerService) {
   }
@@ -57,11 +57,11 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.data).subscribe(
       (resp: any) => {
         if (!resp.status) {
-          this.toast.pop('warning', resp.name, resp.msg);
+          this.toast.warning(resp.msg, resp.name);
           return;
         }
 
-        this.toast.pop('success', 'Success', resp.msg);
+        this.toast.success(resp.msg);
         this.token.save = resp.token;
         this.secretCode.save = resp.secretCode;
 
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
         }, 400);
       },
 
-      (err: any) => this.toast.pop('error', 'Error', err.message),
+      (err: any) => this.toast.error(err.message),
       () => this.hideSpinner()
     );
   }

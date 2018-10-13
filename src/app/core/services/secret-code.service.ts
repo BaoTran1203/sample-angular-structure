@@ -8,11 +8,13 @@ export class SecretCodeService {
   constructor() { }
 
   set save(value: string) {
-    window.localStorage.setItem(KEY, value);
+    let code = value.split('').reverse().join('');
+    window.localStorage.setItem(KEY, code);
   }
 
   get get(): string {
-    return window.localStorage.getItem(KEY);
+    let code = window.localStorage.getItem(KEY);
+    return code.split('').reverse().join('');
   }
 
   get delete() {
