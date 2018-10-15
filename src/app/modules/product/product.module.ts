@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbDatepickerModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../../shared/shared.module';
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
@@ -10,8 +12,12 @@ import { ProductSearchFormComponent } from './product-search-form/product-search
 @NgModule({
   imports : [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     ProductRoutingModule,
-    SharedModule
+    SharedModule,
+    NgbDatepickerModule,
+    NgbPaginationModule
   ],
   declarations : [
     ProductDetailComponent,

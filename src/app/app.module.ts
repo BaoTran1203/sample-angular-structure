@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { enableProdMode, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { Ng4LoadingSpinnerModule, Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { environment } from '../environments/environment';
@@ -37,6 +38,7 @@ if (environment.production) {
     TemplateModule,
 
     // Libs Module
+    NgbModule,
     ToasterModule,
     Ng4LoadingSpinnerModule.forRoot()
   ],

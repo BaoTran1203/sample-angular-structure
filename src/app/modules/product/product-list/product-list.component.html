@@ -14,4 +14,124 @@
 </ol>
 <!-- /.breadcrumb -->
 
-<app-product-search-form></app-product-search-form>
+<form class="search-form" (submit)="search()">
+  <div class="row">
+    <div class="col-sm-2">
+      <div class="form-group">
+        <input [(ngModel)]="params.keyword" type="text" class="form-control" name="keyword"
+               placeholder="Nhập từ khoá..."/>
+      </div>
+      <!-- /.form-group -->
+    </div>
+    <!-- /.col-sm-6 -->
+    
+    <div class="col-sm-2">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="Ngày bắt đầu"
+                 name="startDate" [(ngModel)]="params.startDate" ngbDatepicker #startDate="ngbDatepicker">
+          <button class="input-group-addon" (click)="startDate.toggle()" type="button">
+            <i class="mdi mdi-calendar"></i>
+          </button>
+        </div>
+        <!-- /.input-group -->
+      </div>
+      <!-- /.form-group -->
+    </div>
+    <!-- /.col-sm-2 -->
+    
+    <div class="col-sm-2">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="Ngày kết thúc"
+                 name="endDate" [(ngModel)]="params.endDate" ngbDatepicker #endDate="ngbDatepicker">
+          <button class="input-group-addon" (click)="endDate.toggle()" type="button">
+            <i class="mdi mdi-calendar"></i>
+          </button>
+        </div>
+        <!-- /.input-group -->
+      </div>
+      <!-- /.form-group -->
+    </div>
+    <!-- /.col-sm-2 -->
+    
+    <div class="col-sm-2 text-right">
+      <div class="form-group">
+        <button type="submit" class="btn btn-secondary">
+          <i class="fa fa-search"></i> Tìm kiếm
+        </button>
+      </div>
+      <!-- /.form-group -->
+    </div>
+    <!-- /.col-sm-6 -->
+  </div>
+  <!-- /.row -->
+</form>
+<!-- /.search-form -->
+
+<div class="row">
+  <p *ngIf="!items.length">
+    Không tìm thấy dữ liệu hợp lệ.
+  </p>
+  
+  <div *ngIf="items.length" class="row">
+    <div class="col-sm-4" *ngFor="let item of items">
+      
+      <div class="item">
+        <div class="image">
+          <img [src]="item.thumbnail" class="card-image" alt="{{item.title}}">
+        </div>
+        <!-- /.image -->
+        
+        <div class="item-content">
+          <h3>{{item.title}}</h3>
+          
+          <div *ngIf="item.discount <= 0" class="price">
+            <span class="normal">
+              {{item.price | number}} VND
+            </span>
+          </div>
+          
+          <div *ngIf="item.discount > 0" class="price">
+            <span class="discount">
+              {{item.price | number}} VND
+            </span>
+  
+            <span class="percent">
+              <strong>- {{item.discount | number}} %</strong>
+            </span>
+            
+            <span class="price-discount text-right">
+              {{item.priceDiscounted | number}} VND
+            </span>
+          </div>
+          
+          <div class="item-actions">
+            <button *ngIf="!isLiked(item)" class="btn btn-success btn-sm" (click)="like(item)">
+              <i class="fa fa-thumbs-up"></i> Thích
+            </button>
+            
+            <button *ngIf="isLiked(item)" class="btn btn-danger btn-sm" (click)="like(item)">
+              <i class="fa fa-thumbs-down"></i> Bỏ thích
+            </button>
+          </div>
+          <!-- /.item-actions -->
+          
+          <div class="clearfix"></div>
+        </div>
+        <!-- /.item-content -->
+      </div>
+      <!-- /.item -->
+    </div>
+    <!-- ./col-md-4 col-sm-6 -->
+  </div>
+  <!-- ./row -->
+</div>
+
+<ngb-pagination [collectionSize]="totalItems"
+                [pageSize]="params.ppp"
+                [(page)]="params.page"
+                [maxSize]="5"
+                [rotate]="true"
+                (pageChange)="getItems()"
+                aria-label="Default pagination"></ngb-pagination>

@@ -7,34 +7,37 @@ import * as $ from 'jquery';
 @Injectable({providedIn : 'root'})
 export class ProductService {
 
-  private url_endPoint = `${environment.url}/product`;
-
   constructor(public http: HttpClient) {
   }
 
   list(params: any): Observable<Object> {
     const query = $.param(params);
-    const url = `${this.url_endPoint}?${query}`;
+    const url = `${environment.url}/products?${query}`;
     return this.http.get(url);
   }
 
   add(model: any): Observable<Object> {
-    const url = `${this.url_endPoint}`;
+    const url = `${environment.url}/product`;
     return this.http.post(url, model);
   }
 
   detail(id: string): Observable<Object> {
-    const url = `${this.url_endPoint}/${id}`;
+    const url = `${environment.url}/product/${id}`;
     return this.http.get(url);
   }
 
   update(model: any): Observable<Object> {
-    const url = `${this.url_endPoint}`;
+    const url = `${environment.url}/product`;
     return this.http.put(url, model);
   }
 
   delete(model: any): Observable<Object> {
-    const url = `${this.url_endPoint}/${model._id}`;
+    const url = `${environment.url}/product/${model._id}`;
     return this.http.delete(url);
+  }
+
+  wishlist(id: string, status: number): Observable<Object> {
+    const url = `${environment.url}/product/${id}/wishlist/${status}`;
+    return this.http.get(url);
   }
 }

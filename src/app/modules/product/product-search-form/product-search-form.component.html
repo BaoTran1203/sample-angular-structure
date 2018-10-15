@@ -1,3 +1,51 @@
-<p>
-  product-search-form works!
-</p>
+<form class="search-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="keyword" title="" placeholder="Nhập từ khoá...">
+      </div>
+      <!-- ./form-group -->
+    </div>
+    <!-- /.col-sm-4 -->
+    
+    <div class="col-sm-2">
+      <div class="form-group">
+        <div class="input-group">
+          <input ngbDatepicker class="form-control" formControlName="startDate" title="" placeholder="Ngày bắt đầu" #startDate="ngbDatepicker">
+          <button class="input-group-addon" (click)="startDate.toggle()" type="button">
+            <i class="mdi mdi-calendar"></i>
+          </button>
+        </div>
+        <!-- /.input-group -->
+      </div>
+      <!-- /.form-group -->
+    </div>
+    <!-- /.col-sm-2 -->
+  
+    <div class="col-sm-2">
+      <div class="form-group">
+        <div class="input-group">
+          <input ngbDatepicker class="form-control" formControlName="endDate" title="" placeholder="Ngày kết thúc" #endDate="ngbDatepicker">
+          <button class="input-group-addon" (click)="endDate.toggle()" type="button">
+            <i class="mdi mdi-calendar"></i>
+          </button>
+        </div>
+        <!-- /.input-group -->
+      </div>
+      <!-- /.form-group -->
+    </div>
+    <!-- /.col-sm-2 -->
+    
+    <div class="col-sm-4 text-right">
+      <div class="form-group">
+        <button type="submit" class="btn btn-secondary">
+          <i class="fa fa-search"></i> Tìm kiếm
+        </button>
+      </div>
+      <!-- /.form-group -->
+    </div>
+    <!-- /.col-sm-6 -->
+  </div>
+  <!-- /.row -->
+</form>
+<!-- /.search-form -->
