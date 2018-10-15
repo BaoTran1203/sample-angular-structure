@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http/';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
+import { ProfileService } from '../services/profile.service';
 import { SecretCodeService } from '../services/secret-code.service';
 import { TokenService } from '../services/token.service';
 
@@ -12,6 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
   constructor(private token: TokenService,
               private secretCode: SecretCodeService,
+              private profile: ProfileService,
               private router: Router) {
   }
 
@@ -36,6 +38,7 @@ export class JwtInterceptor implements HttpInterceptor {
   private backToLoginPage() {
     this.token.delete;
     this.secretCode.delete;
+    this.profile.delete;
     setTimeout(() => {
       this.router.navigate(['auth/login']).then().catch();
     }, 400);

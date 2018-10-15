@@ -27,8 +27,8 @@
     
     <h3>Danh mục</h3>
     <ul>
-      <li data-menu-item="dashboard" class="active">
-        <a routerLink="/dashboard">
+      <li data-menu-item="all" class="active">
+        <a routerLink="/product/list">
           <i class="icon mdi mdi-view-dashboard"></i>
           <span>Tất cả</span>
         </a>
@@ -36,7 +36,7 @@
       
       <ng-container *ngFor="let item of items">
         <li [attr.data-menu]="item.slug">
-          <a>
+          <a [routerLink]="['/product/list', {category: item._id, slug: item.slug}]">
             <i class="icon mdi mdi-cards"></i>
             <span>{{ item.title }}</span>
           </a>

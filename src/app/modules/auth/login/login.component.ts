@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../../../core/http/auth.service';
+import { ProfileService } from '../../../core/services/profile.service';
 import { SecretCodeService } from '../../../core/services/secret-code.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { TokenService } from '../../../core/services/token.service';
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
               private authService: AuthService,
               private token: TokenService,
               private secretCode: SecretCodeService,
+              private profile: ProfileService,
               private toast: ToastService,
               private router: Router,
               private spinnerService: Ng4LoadingSpinnerService) {
@@ -62,8 +64,10 @@ export class LoginComponent implements OnInit {
         }
 
         this.toast.success(resp.msg);
+
         this.token.save = resp.token;
         this.secretCode.save = resp.secretCode;
+        this.profile.save = resp.data;
 
         setTimeout(() => {
           this.router.navigate(['/product/list']).then().catch();
