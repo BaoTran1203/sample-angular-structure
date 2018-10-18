@@ -1,0 +1,82 @@
+<div class="page-header">
+  <h1>Yêu thích</h1>
+</div>
+<!-- /.page-header -->
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a routerLink="/">Quản trị</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a routerLink="/product/list">Sản phẩm</a>
+  </li>
+  <li class="breadcrumb-item active">Yêu thích</li>
+</ol>
+<!-- /.breadcrumb -->
+
+<div class="row">
+  <p *ngIf="!items.length">
+    Không tìm thấy dữ liệu hợp lệ.
+  </p>
+  
+  <div *ngIf="items.length" class="row">
+    <div class="col-sm-4" *ngFor="let item of items">
+      
+      <div class="item">
+        <div class="image">
+          <img [src]="item.thumbnail" class="card-image" alt="{{item.title}}">
+        </div>
+        <!-- /.image -->
+        
+        <div class="item-content">
+          <h3>{{item.title}}</h3>
+          
+          <div *ngIf="item.discount <= 0" class="price">
+            <span class="normal">
+              {{item.price | number}} VND
+            </span>
+          </div>
+          
+          <div *ngIf="item.discount > 0" class="price">
+            <span class="discount">
+              {{item.price | number}} VND
+            </span>
+            
+            <span class="percent">
+              <strong>- {{item.discount | number}} %</strong>
+            </span>
+            
+            <span class="price-discount text-right">
+              {{item.priceDiscounted | number}} VND
+            </span>
+          </div>
+          
+          <div class="item-actions">
+            <button *ngIf="!isLiked(item)" class="btn btn-success btn-sm" (click)="like(item)">
+              <i class="fa fa-thumbs-up"></i> Thích
+            </button>
+            
+            <button *ngIf="isLiked(item)" class="btn btn-danger btn-sm" (click)="like(item)">
+              <i class="fa fa-thumbs-down"></i> Bỏ thích
+            </button>
+          </div>
+          <!-- /.item-actions -->
+          
+          <div class="clearfix"></div>
+        </div>
+        <!-- /.item-content -->
+      </div>
+      <!-- /.item -->
+    </div>
+    <!-- ./col-md-4 col-sm-6 -->
+  </div>
+  <!-- ./row -->
+</div>
+
+<ngb-pagination [collectionSize]="totalItems"
+                [pageSize]="params.ppp"
+                [(page)]="params.page"
+                [maxSize]="5"
+                [rotate]="true"
+                (pageChange)="getItems()"
+                aria-label="Default pagination"></ngb-pagination>

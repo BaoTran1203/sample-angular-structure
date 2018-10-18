@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../../../core/http/auth.service';
@@ -25,7 +26,9 @@ export class LoginComponent implements OnInit {
               private profile: ProfileService,
               private toast: ToastService,
               private router: Router,
-              private spinnerService: Ng4LoadingSpinnerService) {
+              private spinnerService: Ng4LoadingSpinnerService,
+              private title: Title) {
+    this.title.setTitle('Đăng nhập');
   }
 
   ngOnInit() {

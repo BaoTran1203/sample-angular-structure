@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../../../core/http/auth.service';
@@ -20,7 +21,9 @@ export class ResetComponent implements OnInit {
               private router: Router,
               private spinnerService: Ng4LoadingSpinnerService,
               private authService: AuthService,
-              private toast: ToastService) {
+              private toast: ToastService,
+              private title: Title) {
+    this.title.setTitle('Khôi phục mật khẩu');
   }
 
   ngOnInit() {

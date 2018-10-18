@@ -1,28 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import * as _ from 'lodash';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { CategoryService } from '../../../core/http/category.service';
 import { ProductService } from '../../../core/http/product.service';
 import { ProfileService } from '../../../core/services/profile.service';
 import { ToastService } from '../../../core/services/toast.service';
-import * as _ from 'lodash';
 
 @Component({
-  selector : 'app-product-list',
-  templateUrl : './product-list.component.html',
-  styleUrls : ['./product-list.component.scss']
+  selector : 'app-product-wish-list',
+  templateUrl : './product-wish-list.component.html',
+  styleUrls : ['./product-wish-list.component.scss']
 })
 
-export class ProductListComponent implements OnInit {
+export class ProductWishListComponent implements OnInit {
 
   public items: any = [];
   public totalItems: number = 0;
-  public categories: any[] = [];
 
   public params: any = {
-    category : '',
-    keyword : '',
+    wishlist : true,
     page : 1,
     ppp : 50,
     sort_by : 'createdAt',
@@ -36,47 +34,11 @@ export class ProductListComponent implements OnInit {
               private categoryService: CategoryService,
               private profile: ProfileService,
               private title: Title) {
-    this.title.setTitle('Sản phẩm');
+    this.title.setTitle('Sản phẩm yêu thích');
   }
 
   ngOnInit() {
-    let DATE_NOW = new Date();
-
-    // Set default Datetime in SearchBox
-    this.params.startDate = {
-      year : DATE_NOW.getFullYear(),
-      month : DATE_NOW.getMonth() + 1,
-      day : DATE_NOW.getDate()
-    };
-
-    this.params.endDate = {
-      year : DATE_NOW.getFullYear(),
-      month : DATE_NOW.getMonth() + 1,
-      day : DATE_NOW.getDate()
-    };
-
-    this.getCategory();
     this.getItems();
-  }
-
-  public getCategory() {
-    let query: any = {
-      status : 'activated',
-      page : 1,
-      ppp : 999
-    };
-    this.categoryService.list(query).subscribe(
-      (resp: any) => {
-        if (!resp.status) {
-          this.categories = [];
-          this.toast.warning(resp.msg, resp.name);
-          return;
-        }
-        this.categories = resp.data;
-      },
-
-      (err: any) => this.toast.error(err.message)
-    );
   }
 
   /**
@@ -106,7 +68,6 @@ export class ProductListComponent implements OnInit {
    * Reset page to 1 and search with new filter
    */
   public search() {
-    console.log('params', this.params);
     this.params.page = 1;
     this.getItems();
   }

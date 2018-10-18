@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Heading</h1>
+  <h1>Sản phẩm</h1>
 </div>
 <!-- /.page-header -->
 
@@ -16,7 +16,7 @@
 
 <form class="search-form" (submit)="search()">
   <div class="row">
-    <div class="col-sm-2">
+    <div class="col-sm-6">
       <div class="form-group">
         <input [(ngModel)]="params.keyword" type="text" class="form-control" name="keyword"
                placeholder="Nhập từ khoá..."/>
@@ -24,6 +24,17 @@
       <!-- /.form-group -->
     </div>
     <!-- /.col-sm-6 -->
+    
+    <div class="col-sm-2">
+      <div class="form-group">
+        <select class="form-control" name="category" [(ngModel)]="params.category" title="category">
+          <option value="">- Category -</option>
+          <option *ngFor="let item of categories" [value]="item._id">
+            {{ item.title }}
+          </option>
+        </select>
+      </div>
+    </div>
     
     <div class="col-sm-2">
       <div class="form-group">
@@ -54,6 +65,37 @@
       <!-- /.form-group -->
     </div>
     <!-- /.col-sm-2 -->
+    
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label class="left">Sắp xếp theo</label>
+        <div class="btn-group btn-group-toggle" ngbRadioGroup [(ngModel)]="params.sort_by" name="sort_by" (change)="getItems()">
+          <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" value="createdAt"> Ngày thêm
+          </label>
+          <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" value="category"> Danh mục
+          </label>
+          <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" value="price"> Giá
+          </label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-sm-4">
+      <div class="form-group">
+        <label class="left">Thứ tự</label>
+        <div class="btn-group btn-group-toggle" ngbRadioGroup [(ngModel)]="params.sort_order" name="sort_order" (change)="getItems()">
+          <label ngbButtonLabel class="btn-info">
+            <input ngbButton type="radio" value="1" > Tăng dần
+          </label>
+          <label ngbButtonLabel class="btn-info">
+            <input ngbButton type="radio" value="-1"> Giảm dần
+          </label>
+        </div>
+      </div>
+    </div>
     
     <div class="col-sm-2 text-right">
       <div class="form-group">
@@ -96,7 +138,7 @@
             <span class="discount">
               {{item.price | number}} VND
             </span>
-  
+            
             <span class="percent">
               <strong>- {{item.discount | number}} %</strong>
             </span>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../../../core/http/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
@@ -17,7 +18,10 @@ export class ForgotComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private spinnerService: Ng4LoadingSpinnerService,
               private authService: AuthService,
-              private toast: ToastService) { }
+              private toast: ToastService,
+              private title: Title) {
+    this.title.setTitle('Quên mật khẩu');
+  }
 
   ngOnInit() {
     this.buildForm();

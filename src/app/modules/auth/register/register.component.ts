@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { AuthService } from '../../../core/http/auth.service';
@@ -19,7 +20,9 @@ export class RegisterComponent implements OnInit {
               private authService: AuthService,
               private toast: ToastService,
               private router: Router,
-              private loading: Ng4LoadingSpinnerService) {
+              private loading: Ng4LoadingSpinnerService,
+              private title: Title) {
+    this.title.setTitle('Đăng ký');
   }
 
   ngOnInit() {
