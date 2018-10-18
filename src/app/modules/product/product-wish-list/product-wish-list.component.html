@@ -30,25 +30,23 @@
         
         <div class="item-content">
           <h3>{{item.title}}</h3>
-          
-          <div *ngIf="item.discount <= 0" class="price">
-            <span class="normal">
-              {{item.price | number}} VND
-            </span>
+  
+          <div *ngIf="item.discount <= 0" class="price normal">
+            {{item.price | number}} $
           </div>
-          
-          <div *ngIf="item.discount > 0" class="price">
-            <span class="discount">
-              {{item.price | number}} VND
-            </span>
-            
-            <span class="percent">
+  
+          <div *ngIf="item.discount > 0" class="row">
+            <div class="col-sm-4 text-left discount">
+              {{item.price | number}} $
+            </div>
+    
+            <div class="col-sm-4 text-center percent">
               <strong>- {{item.discount | number}} %</strong>
-            </span>
-            
-            <span class="price-discount text-right">
-              {{item.priceDiscounted | number}} VND
-            </span>
+            </div>
+    
+            <div class="col-sm-4 text-right price-discount">
+              {{item.priceDiscounted | number}} $
+            </div>
           </div>
           
           <div class="item-actions">
